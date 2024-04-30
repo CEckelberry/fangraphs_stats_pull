@@ -52,7 +52,7 @@ def upload_to_bigquery(df, table_id):
     print("DataFrame Schema Before Upload:")
     print(df.dtypes)
     try:
-        df.to_gbq(destination_table, project_id=project_id, credentials=credentials, if_exists='replace')
+        df.to_gbq(destination_table, project_id=project_id, credentials=credentials, if_exists='append')
         print(f"Uploaded {table_id} successfully.")
     except Exception as e:
         print(f"Failed to upload {table_id}: {e}")
@@ -72,4 +72,4 @@ def download_baseball_data(start_year, end_year):
             upload_to_bigquery(chunk, stat_type)
 
 if __name__ == "__main__":
-    download_baseball_data(current_year, current_year)
+    download_baseball_data(1950, 1970)
